@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+        }
+        #resultado {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid gray;
+            min-height: 40px;
+            background: #f9f9f9;
+        }
+       
+    </style>
+</head>
+<body>
+
+    <h2>Escribe un texto y muéstralo abajo</h2>
+
+
+    <input type="text" id="texto" placeholder="Escribe algo aquí...">
+    <button onclick="mostrarTexto()">Mostrar abajo</button>
+
+  
+    <div id="resultado"></div>
+
+    <script>
+       
+        window.onload = function() {
+            let historial = localStorage.getItem("historial");
+            if (historial) {
+                document.getElementById("resultado").innerHTML = historial;
+            }
+        }
+
+        function mostrarTexto() {
+            let textoIngresado = document.getElementById("texto").value;
+
+            if (textoIngresado.trim() !== "") { 
+                let contenedor = document.getElementById("resultado");
+
+            
+                let nuevoElemento = document.createElement("div");
+       
+                nuevoElemento.innerText = textoIngresado;
+
+        
+                contenedor.appendChild(nuevoElemento);
+
+                localStorage.setItem("historial", contenedor.innerHTML);
+
+                
+                document.getElementById("texto").value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>
